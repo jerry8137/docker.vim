@@ -23,9 +23,7 @@ RUN sudo apt-get install -y \
     vim
 
 WORKDIR /home/jerry
-#ENV DEBIAN_FRONTEND noninteractive
-#RUN (echo "yes" && cat) | curl -sL install-node.vercel.app/lts | sudo bash
-#RUN curl -sL install-node.vercel.app/lts | sudo bash 
+
 ENV NODE_VERSION=16.13.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 ENV NVM_DIR=/home/jerry/.nvm
@@ -41,3 +39,6 @@ RUN sh /home/jerry/.vim_runtime/install_awesome_vimrc.sh
 
 ADD run.sh /home/jerry/
 RUN sh /home/jerry/run.sh
+
+WORKDIR /home/jerry/src
+ENTRYPOINT ["vim"]

@@ -2,8 +2,9 @@ FROM ubuntu:20.04
 
 RUN apt-get update
 
+ARG UID
 ARG USERNAME=jerry
-ARG USER_UID=1000
+ARG USER_UID=$UID
 ARG USER_GID=$USER_UID
 
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -39,6 +40,8 @@ RUN sh /home/jerry/.vim_runtime/install_awesome_vimrc.sh
 
 ADD run.sh /home/jerry/
 RUN sh /home/jerry/run.sh
+
+#RUN echo "let g:coc_disable_startup_warning = 1" >> .vim_runtime/my_configs.vim
 
 WORKDIR /home/jerry/src
 ENTRYPOINT ["vim"]
